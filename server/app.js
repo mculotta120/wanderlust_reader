@@ -31,6 +31,7 @@ app.post( '/testPost', function( req, res ){  // POST call
   var recordToAdd={  // adds record from input
     issue_number: req.body.issue_number,
     issue_name: req.body.issue_name,
+    issue_thumbnail:req.body.issue_thumbnail,
     issue_pages: req.body.issue_pages
   };
   var newRecord=fa_issues( recordToAdd );  // saves record to database

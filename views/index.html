@@ -16,32 +16,32 @@
    <div ng-init="tab=1" >
      <div class="container">
        <div class= "buttonTab">
-         <button class="btn btn-info" ng-click="tab = 1"> Add Issue </button>
-         <button class="btn btn-info" ng-click="tab = 2"> View Library </button>
+         <button class="btn btn-danger" ng-click="tab = 1"> Add Issue </button>
+         <button class="btn btn-danger" ng-click="tab = 2"> View Library </button>
        </div>
    </div>
  <div ng-show="tab == 1" id= "addIssue">
-   <h2> Add Issues to DB</h2>
-      <div  id = display >
+      <div  id="addIn" >
+         <h2> Add Issues to DB</h2>
         <input type= "text" ng-model= "issueNumberBinder" value= "" placeholder="Issue Number" required>
         <input type= "text" ng-model= "issueNameBinder" value= "" placeholder="Issue Name" required>
+        <input type="text" ng-model="issueThumbnailBinder"  value="" placeholder="Issue Thumbnail" required>
         <input type= "text" ng-model= "pagesBinder" value= "" placeholder="Issue Pages" required>
-        <button class="btn btn-info" ng-click= "addIssue()" >Submit</button>
+        <button class="btn btn-danger" ng-click= "addIssue()" >Submit</button>
      </div>
  </div>
 
- <div ng-show="tab == 2" id= "displayIssues" class="container">
-   <h2>Display Pets</h2>
-   <button class="btn btn-info" ng-click= "getIssues()" >Show all Pets</button>
-       <div class = "row">
-         <div class= "showIssues col-md-6" ng-repeat='record in allIssues'>
-           <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}<br>
-           {{record.issue_pages}}
-           <!-- <img ng-src="{{record.photo}}" alt="{{record.pet_name}}'s photo" width: "200px" /> -->
-    </div>
- </div>
-  </div>
-  </div>
+     <div ng-show="tab == 2" id= "displayIssues" class="container">
+       <h2>Available Issues</h2>
+       <button class="btn btn-danger" ng-click= "getIssues()" >Show all Issues</button>
+         <div class = "row">
+             <div class= "showIssues col-md-6" ng-repeat='record in allIssues'>
+               <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}
+                <img ng-src="{{record.issue_thumbnail}}" alt="{{record.issue_name}}'s cover" height= "50px" />
+              </div>
+          </div>
+      </div>
+</div>
 
   </body>
 </html>

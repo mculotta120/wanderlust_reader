@@ -1,3 +1,21 @@
 body{
-  background-color: #DFEFF2;
+  background-color: #181919;
+  color: #B11919;
+}
+h1{
+  text-align: left;
+  margin-left: 40px;
+}
+
+#addIn{
+  background-color: white;
+  padding: 100px;
+  margin: 50px;
+}
+
+#displayIssues{
+  background-color: white;
+  padding: 100px;
+  margin: 50px;
+
 }
