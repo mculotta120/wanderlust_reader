@@ -5,14 +5,43 @@
     <title>This is a Library Test</title>
     <script src="vendors/angular.min.js" type="text/javascript"></script>
     <script src="scripts/client.js" type="text/javascript"></script>
+    <link rel="stylesheet" href= "vendors/bootstrap.min.css"/>
     <link rel="stylesheet" href= "/stylesheets/main.css"/>
   </head>
   <body>
-    <h1>WELCOME TO WANDERLUST COMIC READER</h1>
-  <div ng-repeat='record in allIssues'>
+    <body ng-controller = 'LibraryController'>
+    <div id= "main">
+       <h1> WANDERLUST COMIC READER </h1>
 
+   <div ng-init="tab=1" >
+     <div class="container">
+       <div class= "buttonTab">
+         <button class="btn btn-info" ng-click="tab = 1"> Add Issue </button>
+         <button class="btn btn-info" ng-click="tab = 2"> View Library </button>
+       </div>
+   </div>
+ <div ng-show="tab == 1" id= "addIssue">
+   <h2> Add Issues to DB</h2>
+      <div  id = display >
+        <input type= "text" ng-model= "issueNumberBinder" value= "" placeholder="Issue Number" required>
+        <input type= "text" ng-model= "issueNameBinder" value= "" placeholder="Issue Name" required>
+        <input type= "text" ng-model= "pagesBinder" value= "" placeholder="Issue Pages" required>
+        <button class="btn btn-info" ng-click= "addIssue()" >Submit</button>
+     </div>
+ </div>
+
+ <div ng-show="tab == 2" id= "displayIssues" class="container">
+   <h2>Display Pets</h2>
+   <button class="btn btn-info" ng-click= "getIssues()" >Show all Pets</button>
+       <div class = "row">
+         <div class= "showIssues col-md-6" ng-repeat='record in allIssues'>
+           <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}<br>
+           {{record.issue_pages}}
+           <!-- <img ng-src="{{record.photo}}" alt="{{record.pet_name}}'s photo" width: "200px" /> -->
+    </div>
+ </div>
   </div>
-
+  </div>
 
   </body>
 </html>

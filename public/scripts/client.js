@@ -3,24 +3,40 @@ console.log("client.js is sourced");
 // create an ng app for the page
 var myApp = angular.module( 'myApp', [] );
 //create a controller
-myApp.controller('sampleController', [ '$scope', function( $scope ){
-  $scope.outsideArray = [];
-  $scope.GetIssue = function(){
+myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $http ){
+    $scope.allIssues = [];
+    event.preventDefault();
+    $scope.getIssues = function(){  // gets current recordset upon button click
+        $http({   // gets recordset via GET
+          method: 'GET',
+          url: '/getIssue',
+        }).then( function( response ){  // success call - runs function with response parameter
+          console.log(response);
+            $scope.allIssues = response.data;  // pulls the data from app.js and sets to allTheRecords
+          }, function myError( response ){
+          console.log( response.statusText );
+        }); //end .then
+}; //end getIssues
 
-    // var input1 = $scope.sampleBinder;
-    // var input2 = $scope.sampleBinder2;
-    //
-    // console.log('input gathered: ' + input1 + " " + input2 );
-    //
-    // var objectToSend = {
-    //   "first": input1,
-    //   "second": input2
-    // };
-    //
-    // $scope.outsideArray.push(objectToSend);
+$scope.addIssue = function(){ // adds issue on button click
 
-    console.log("objectToSend : " + objectToSend );
+  var objectToSend ={  // package object to send, with inputs
+    issue_number: $scope.issueNumberBinder,
+    issue_name: $scope.issueNameBinder,
+    issue_pages: $scope.pagesBinder  // reference these in html
+  }; //end objectToSend
 
-  }; //end check input function
+  $http({  // sends object via POST
+    method: 'POST',
+    url: '/testPost',
+    data: objectToSend
+  }); //end $http
 
-}]);
+  $scope.issueNumberBinder =''; // clears input boxes
+  $scope.issueNameBinder ='';
+  $scope.pagesBinder ='';
+}; // end addIssue function
+
+
+
+}]);  //end myApp controller
