@@ -37,3 +37,20 @@ app.post( '/testPost', function( req, res ){  // POST call
   var newRecord=fa_issues( recordToAdd );  // saves record to database
   newRecord.save();
 });
+
+app.post( '/galleryPost', function( req, res ){  // POST call
+  var displayIssueObject = {
+    id:req.body.id,
+    pages:req.body.issue_pages
+  };
+  console.log("here is ",displayIssueObject.pages);
+  fa_issues.findOne({_id:req.body.id}, function(err, issueResult){
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+    console.log(req.body.id, " found.", req.body.issue_pages, "available");
+    res.sendStatus(200);
+    }
+  });
+}); //end gallery post

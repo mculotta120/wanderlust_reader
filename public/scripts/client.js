@@ -5,19 +5,20 @@ var myApp = angular.module( 'myApp', [] );
 //create a controller
 myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
+
     event.preventDefault();
     $scope.getIssues = function(){  // gets current recordset upon button click
         $http({   // gets recordset via GET
           method: 'GET',
           url: '/getIssue',
         }).then( function( response ){  // success call - runs function with response parameter
-          console.log(response);
+          // console.log(response);
             $scope.allIssues = response.data;  // pulls the data from app.js and sets to allTheRecords
           }, function myError( response ){
           console.log( response.statusText );
         }); //end .then
 }; //end getIssues
-
+event.preventDefault();
 $scope.addIssue = function(){ // adds issue on button click
 
   var objectToSend ={  // package object to send, with inputs
@@ -38,6 +39,25 @@ $scope.addIssue = function(){ // adds issue on button click
   $scope.issueThumbnailBinder = '';
   $scope.pagesBinder ='';
 }; // end addIssue function
+
+  $scope.issueToView = [];
+$scope.galleryOpen = function(index){
+  var issueObject = {
+    id:$scope.allIssues[index]._id,
+    pages:$scope.allIssues[index].issue_pages[0]
+  };
+  $http({   // gets recordset via GET
+    method: 'POST',
+    url: '/galleryPost',
+    data: issueObject
+  }).then(function(response){
+    $scope.issueToView = response.data;
+    console.log(response, " is back");
+  }, function myError( response ){
+    console.log(response.statusText);
+  }); //end post
+}; //end GalleryOpen
+
 
 
 
