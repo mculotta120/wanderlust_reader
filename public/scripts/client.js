@@ -27,8 +27,9 @@ myApp.config(['$routeProvider', function($routeProvider){
 //create a controller
 myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
-
+    $scope.issueToView = [];
     event.preventDefault();
+
     $scope.getIssues = function(){  // gets current recordset upon button click
         $http({   // gets recordset via GET
           method: 'GET',
@@ -41,12 +42,25 @@ myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $h
         }); //end .then
 }; //end getIssues
 
-  $scope.issueToView = [];
+
 $scope.galleryOpen = function(index){
+  // $http({   // gets recordset via GET
+  //   method: 'GET',
+  //   url: '/getPages',
+  // }).then( function( response ){  // success call - runs function with response parameter
+  //   // console.log(response, "from GET");
+  //     $scope.issueToView = response.data;  // pulls the data from app.js and sets to allTheRecords
+  //   }, function myError( response ){
+  //   console.log( response.statusText );
+  // }); //end .then
+
   var issueObject = {
     id:$scope.allIssues[index]._id,
-    pages:$scope.allIssues[index].issue_pages[0]
+    number:$scope.allIssues[index].issue_number,
+    name:$scope.allIssues[index].issue_name,
+    pages:$scope.allIssues[index].issue_pages
   };
+  console.log("issue object out: ", issueObject);
   $http({   // gets recordset via GET
     method: 'POST',
     url: '/galleryPost',
@@ -68,6 +82,7 @@ myApp.controller('homeController',['$scope', function($scope){
 
 myApp.controller('galleryController',['$scope', function($scope){
   console.log('gallery loaded');
+
 
 }]); // end gallery controller
 

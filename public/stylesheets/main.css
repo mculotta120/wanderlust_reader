@@ -32,3 +32,16 @@ p{
   padding: 50px;
   margin: 30px;
 }
+#Gallery{
+  background-color: white;
+  padding: 100px;
+  margin: 50px;
+}
+#Gallery img{
+}
+#issueInformation{
+  text-align: right;
+}
+#galleryNav{
+  margin: auto;
+}

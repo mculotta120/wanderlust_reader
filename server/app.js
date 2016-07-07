@@ -38,10 +38,20 @@ app.post( '/testPost', function( req, res ){  // POST call
   newRecord.save();
 });
 
+// app.get( '/getPages', function( req, res ){  // GET function to retrieve data
+//   fa_issues.find() // This is where the magic happens - all new and existing are found here
+//   .then( function( data ){
+//     // console.log("data from app" + data);
+//     res.send( data );  // returns records as "data"
+//   });
+// });
+
 app.post( '/galleryPost', function( req, res ){  // POST call
   var displayIssueObject = {
     id:req.body.id,
-    pages:req.body.issue_pages
+    number:req.body.number,
+    name:req.body.name,
+    pages:req.body.pages
   };
   console.log("here is ",displayIssueObject.pages);
   fa_issues.findOne({_id:req.body.id}, function(err, issueResult){
@@ -49,7 +59,7 @@ app.post( '/galleryPost', function( req, res ){  // POST call
       console.log(err);
       res.sendStatus(500);
     }else{
-    console.log(req.body.id, " found.", req.body.issue_pages, "available");
+    console.log(req.body.id, " found.", req.body.pages, "available");
     res.sendStatus(200);
     }
   });
