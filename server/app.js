@@ -2,7 +2,8 @@ var express = require('express');  // require express
 var app=express();
 var path = require('path');  // sets up basic path
 var bodyParser = require('body-parser');  // require bodyparser for POST calls
-var fa_issues=require('../models/fa_issueColl.js');  // requiring the assignments model
+var fa_issues=require('../models/fa_issueColl.js');  // requiring the fa_issueColl model
+// var arrayPages=require('../models/pagesArraySchema.js');
 var mongoose = require('mongoose');  // require mongoose for mongo db
 
 app.use( bodyParser.json() );
@@ -19,14 +20,14 @@ app.listen( 8080, 'localhost', function( req, res ){ // spins up server
   console.log( 'listening on 8080' );
 });
 
-app.get( '/getIssue', function( req, res ){  // GET function to retrieve data
-  fa_issues.find() // This is where the magic happens - all new and existing are found here
-  .then( function( data ){  // similar to ajax get call - if found, then run function with data as parameter
-    // console.log("data from app" + data);
+app.get( '/getIssue', function( req, res ){  // GET function to retrieve Issues
+  fa_issues.find()
+  .then( function( data ){
     res.send( data );  // returns records as "data"
   });
 });
 
+//adds issue to wanderlustdb --> fa_issues
 app.post( '/testPost', function( req, res ){  // POST call
   var recordToAdd={  // adds record from input
     issue_number: req.body.issue_number,
@@ -38,13 +39,35 @@ app.post( '/testPost', function( req, res ){  // POST call
   newRecord.save();
 });
 
-// app.get( '/getPages', function( req, res ){  // GET function to retrieve data
-//   fa_issues.find() // This is where the magic happens - all new and existing are found here
-//   .then( function( data ){
-//     // console.log("data from app" + data);
-//     res.send( data );  // returns records as "data"
-//   });
-// });
+//post to update pagesArraySchema
+app.post( '/updatePagePost', function( req, res ){  // POST call
+  var pageToAdd={  // adds record from input
+    id: req.body.id,
+    page_number: req.body.page_number,
+    page_Location: req.body.page_location,
+    page_thumbnail:req.body.page_thumbnail,
+  };
+  // console.log( req.body.id, " found.");
+  // var newPageRecord=arrayPages( pageToAdd );  // saves record to database
+  // newPageRecord.save();
+
+  // var addPagesToDB = arrayPages( pageToAdd );
+
+  fa_issues.findByIdAndUpdate(req.body.id, {
+    $set{
+    page_number: req.body.page_number,
+    page_Location: req.body.page_location,
+    page_thumbnail:req.body.page_thumbnail}}, function(err, pageResult){
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      console.log('check mongoAdmin');
+    res.sendStatus(200);
+    }
+  });
+});
+
 
 app.post( '/galleryPost', function( req, res ){  // POST call
   var displayIssueObject = {
