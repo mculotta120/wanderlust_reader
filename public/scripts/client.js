@@ -72,8 +72,11 @@ $scope.galleryOpen = function(index){
 
 }]);  //end myApp controller LibraryController
 
-myApp.controller('homeController',['$scope', function($scope){
+myApp.controller('homeController',['$scope', '$http', function($scope, $http){
   console.log('home loaded');
+    // $http.get('/JSON/issues.json').success(function(data)){
+    //   $scope.testVariable = data;
+    // });
 
 }]); // end home controller
 

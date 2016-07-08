@@ -6,7 +6,7 @@ var fa_issueSchema = new mongoose.Schema({  // set up new mongoose schema
   issue_number: Number,
   issue_name: String,
   issue_thumbnail: String,
-  issue_pages: [{ type: Schema.Types.ObjectId, ref: 'arrayPages' }]
+  issue_pages: [{ type: Schema.Types.Mixed, ref: 'arrayPages' }]
 });
 
 var pagesArraySchema = new mongoose.Schema({  // set up new mongoose schema
@@ -18,6 +18,6 @@ var pagesArraySchema = new mongoose.Schema({  // set up new mongoose schema
 });
 
 var fa_issues = mongoose.model( 'fa_issues', fa_issueSchema );  // sets schema to model var
-
+var arrayPages = mongoose.model( 'arrayPages', pagesArraySchema );
 // module.exports= arrayPages;
 module.exports=fa_issues;

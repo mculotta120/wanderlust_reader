@@ -3,7 +3,7 @@ var app=express();
 var path = require('path');  // sets up basic path
 var bodyParser = require('body-parser');  // require bodyparser for POST calls
 var fa_issues=require('../models/fa_issueColl.js');  // requiring the fa_issueColl model
-// var arrayPages=require('../models/pagesArraySchema.js');
+var arrayPages=require('../models/fa_issueColl.js');
 var mongoose = require('mongoose');  // require mongoose for mongo db
 
 app.use( bodyParser.json() );
@@ -47,17 +47,18 @@ app.post( '/updatePagePost', function( req, res ){  // POST call
     page_Location: req.body.page_location,
     page_thumbnail:req.body.page_thumbnail,
   };
-  // console.log( req.body.id, " found.");
+  console.log( req.body.id, " found.");
   // var newPageRecord=arrayPages( pageToAdd );  // saves record to database
   // newPageRecord.save();
 
   // var addPagesToDB = arrayPages( pageToAdd );
 
   fa_issues.findByIdAndUpdate(req.body.id, {
-    $set{
+    $set:{
     page_number: req.body.page_number,
     page_Location: req.body.page_location,
-    page_thumbnail:req.body.page_thumbnail}}, function(err, pageResult){
+    page_thumbnail:req.body.page_thumbnail}},
+    function(err, pageResult){
     if(err){
       console.log(err);
       res.sendStatus(500);
@@ -66,8 +67,7 @@ app.post( '/updatePagePost', function( req, res ){  // POST call
     res.sendStatus(200);
     }
   });
-});
-
+}); //end updatePagePost
 
 app.post( '/galleryPost', function( req, res ){  // POST call
   var displayIssueObject = {
