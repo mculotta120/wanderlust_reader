@@ -42,15 +42,14 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         }); //end .then
 }; //end getIssues
 
-$scope.openGalleryWindow = function(){
+$scope.openGalleryWindow = function(index){
   var path = "#gallery";
   window.location.href=path;
 
-  // galleryOpen(index);
+  $scope.galleryOpen(index);
 };
 
 $scope.galleryOpen = function(index){
-
   var issueObject = {
     id:$scope.allIssues[index]._id,
     number:$scope.allIssues[index].issue_number,
@@ -64,7 +63,7 @@ $scope.galleryOpen = function(index){
     data: issueObject
   }).then(function(response){
     $scope.issueToView = response.data;
-    console.log(response, " is back from POST");
+    console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
   }, function myError( response ){
     console.log(response.statusText);
   }); //end post

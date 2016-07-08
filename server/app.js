@@ -38,35 +38,31 @@ app.post( '/testPost', function( req, res ){  // POST call
   newRecord.save();
 });
 
-//post to update pagesArraySchema
-app.post( '/updatePagePost', function( req, res ){  // POST call
-  var pageToAdd={  // adds record from input
-    id: req.body.id,
-    page_number: req.body.page_number,
-    page_Location: req.body.page_location,
-    page_thumbnail:req.body.page_thumbnail,
-  };
-  console.log( req.body.id, " found.");
-  // var newPageRecord=arrayPages( pageToAdd );  // saves record to database
-  // newPageRecord.save();
-
-  // var addPagesToDB = arrayPages( pageToAdd );
-
-  fa_issues.findByIdAndUpdate(req.body.id, {
-    $set:{
-    page_number: req.body.page_number,
-    page_Location: req.body.page_location,
-    page_thumbnail:req.body.page_thumbnail}},
-    function(err, pageResult){
-    if(err){
-      console.log(err);
-      res.sendStatus(500);
-    }else{
-      console.log('check mongoAdmin');
-    res.sendStatus(200);
-    }
-  });
-}); //end updatePagePost
+// //post to update pagesArraySchema
+// app.post( '/updatePagePost', function( req, res ){  // POST call
+//   var pageToAdd={  // adds record from input
+//     id: req.body.id,
+//     page_number: req.body.page_number,
+//     page_Location: req.body.page_location,
+//     page_thumbnail:req.body.page_thumbnail,
+//   };
+//   console.log( req.body.id, " found.");
+//
+//   fa_issues.findByIdAndUpdate(req.body.id, {
+//     $set:{
+//     page_number: req.body.page_number,
+//     page_Location: req.body.page_location,
+//     page_thumbnail:req.body.page_thumbnail}},
+//     function(err, pageResult){
+//     if(err){
+//       console.log(err);
+//       res.sendStatus(500);
+//     }else{
+//       console.log('check mongoAdmin');
+//     res.sendStatus(200);
+//     }
+//   });
+// }); //end updatePagePost
 
 app.post( '/galleryPost', function( req, res ){  // POST call
   var displayIssueObject = {

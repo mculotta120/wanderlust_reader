@@ -1,9 +1,9 @@
-<div  id="Gallery" >
+<div  id="Gallery" class= "showIssues col-md-6" ng-repeat='record in issueToView'> >
 <div id="issue_information">
     Issue # 001 "The issue's title of Doom"
   </div>
-  <img ng-src="/images/Issue001/page_01.jpg" alt="Page 01" height= "500px" />
-
+  <!-- <img ng-src="/images/Issue001/page_01.jpg" alt="Page 01" height= "500px" /> -->
+  <img ng-src="{{record.page_location}}" alt="{{record.page_number}}'s cover" height= "50px" />
   <br>
   <div id = galleryNav>
   <button type="button" name="Prevbutton">Previous</button>
@@ -19,4 +19,3 @@
                 <!-- <img ng-src="/images/Issue001/page_01.jpg" alt="Page 01" height= "500px" />
                 <img ng-src="/images/Issue001/page_02.jpg" alt="Page 01" height= "500px" /> -->
               </div>
-    
