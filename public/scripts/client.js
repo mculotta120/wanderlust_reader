@@ -28,6 +28,7 @@ myApp.config(['$routeProvider', function($routeProvider){
 myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
     $scope.issueToView = [];
+    $scope.currentPageIndex = 0;
     event.preventDefault();
 
     $scope.getIssues = function(){  // gets current recordset upon button click
@@ -72,6 +73,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       url: '/pages'
     }).then(function(response){
       $scope.issueToView = response.data[0].pages;
+      $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
       console.log(response.data[0].pages, "response.data[0].pages");
       console.log(response.data[0].pages[0].page_location);
       // $scope.issueToView = response.config.data.pages[0];
@@ -80,6 +82,18 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       console.log(response.statusText);
     }); //end post
     }; //end GalleryOpen
+
+    $scope.nextPage = function(){
+      console.log("next clicked");
+      $scope.currentPageIndex++;
+      console.log( $scope.currentPageIndex );
+      $scope.PagesBack();
+    };
+    $scope.prevPage = function(){
+    console.log("prev clicked");
+      $scope.currentPageIndex--;
+      $scope.PagesBack();
+    };
 
     }]);  //end myApp controller LibraryController
 

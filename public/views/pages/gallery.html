@@ -3,17 +3,17 @@
     <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}
   </div>
   <div class= "showPage" >
-    <img ng-src="{{record.page_location}}" alt="page: {{record.page_number}}" height= "500px" />
+    <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}" height= "500px" />
     <!-- navigation bar under page -->
     <div id = galleryNav>
-      <button type="button" name="Prevbutton">Previous</button>
+      <button type="button" name="Prevbutton" ng-click= "prevPage()">Previous</button>
         <a href="#library">Library</a>
-      <button type="button" name="Nextbutton">Next</button>
+      <button type="button" name="Nextbutton" ng-click= "nextPage()">Next</button>
     </div>
   </div>
   <!-- display thumbnails -->
   <div class = "row">
-    <div class= "showIssues col-md-12" ng-repeat='record in issueToView'>
-    <img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" />
+    <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
+      <img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" />
     </div>
   </div>

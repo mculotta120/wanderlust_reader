@@ -46,20 +46,20 @@ app.post( '/chooseIssue', function( req, res ){  // POST call
     name:req.body.name,
     pages:req.body.pages
   };
-  console.log("here is ",displayIssueObject.pages);
+  // console.log("here is ",displayIssueObject.pages);
   fa_issues.findOne({_id:req.body.id}, function(err, issueResult){
     if(err){
       console.log(err);
       res.sendStatus(500);
     }else{
-    console.log(req.body.id, " found.", req.body.pages, "available");
+    // console.log(req.body.id, " found.", req.body.pages, "available");
     selectedIssue.push(displayIssueObject);
-    console.log("selectedIssue", selectedIssue);
+    // console.log("selectedIssue", selectedIssue);
     res.sendStatus(200);
     }
   }); //end post chooseIssue
 app.get('/pages', function( req, res ){
-console.log("I'm sending ", selectedIssue, " back to you.");
+// console.log("I'm sending ", selectedIssue, " back to you.");
   return res.json(selectedIssue);
 }); // end /pages get
 
