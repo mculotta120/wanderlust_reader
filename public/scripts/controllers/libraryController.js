@@ -1,4 +1,6 @@
-myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $http ){
+//create a controller
+myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $http ){
+  console.log( 'libraryController loaded' );
     $scope.allIssues = [];
     $scope.issueToView = [];
     event.preventDefault();

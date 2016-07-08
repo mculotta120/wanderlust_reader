@@ -10,7 +10,7 @@ myApp.config(['$routeProvider', function($routeProvider){
       }).
       when("/library", {
         templateUrl: "/views/pages/library.html",
-        controller: "LibraryController"
+        controller: "libraryController"
       }).
       when("/gallery", {
         templateUrl: "/views/pages/gallery.html",
@@ -25,7 +25,7 @@ myApp.config(['$routeProvider', function($routeProvider){
       });
 }]);
 //create a controller
-myApp.controller( 'LibraryController', [ '$scope', '$http', function( $scope, $http ){
+myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
     $scope.issueToView = [];
     event.preventDefault();
@@ -74,9 +74,6 @@ $scope.galleryOpen = function(index){
 
 myApp.controller('homeController',['$scope', '$http', function($scope, $http){
   console.log('home loaded');
-    // $http.get('/JSON/issues.json').success(function(data)){
-    //   $scope.testVariable = data;
-    // });
 
 }]); // end home controller
 

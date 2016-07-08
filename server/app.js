@@ -3,7 +3,6 @@ var app=express();
 var path = require('path');  // sets up basic path
 var bodyParser = require('body-parser');  // require bodyparser for POST calls
 var fa_issues=require('../models/fa_issueColl.js');  // requiring the fa_issueColl model
-var arrayPages=require('../models/fa_issueColl.js');
 var mongoose = require('mongoose');  // require mongoose for mongo db
 
 app.use( bodyParser.json() );
