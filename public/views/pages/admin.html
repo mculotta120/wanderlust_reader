@@ -5,15 +5,4 @@
        <input type= "text" ng-model= "issueNameBinder" value= "" placeholder="Issue Name" required>
        <input type="text" ng-model="issueThumbnailBinder"  value="" placeholder="Issue Thumbnail" required>
        <button class="btn btn-danger" ng-click= "addIssue()" >Submit</button>
-
-
-      <button ng-click="getIssues()" name="button">Show Issues</button>
-      <div ng-repeat= 'record in addedIssues'>
-          <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}} has been added.
-          <input type= "text" ng-model= "pageNumberBinder" value= "" placeholder="Page Number" required>
-          <input type= "text" ng-model= "pageLocationBinder" value= "" placeholder="Page Location" required>
-          <input type="text" ng-model="pageThumbnailBinder"  value="" placeholder="Page Thumbnail" required>
-            <button class="btn btn-danger" ng-click= "updatePages($index)" >Add pages</button>
-     </h4>
-</div>
 </div>

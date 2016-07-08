@@ -40,36 +40,48 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
           }, function myError( response ){
           console.log( response.statusText );
         }); //end .then
-}; //end getIssues
+      }; //end getIssues
 
-$scope.openGalleryWindow = function(index){
-  var path = "#gallery";
-  window.location.href=path;
+    // $scope.openGalleryWindow = function(index){
+    //   var path = "#gallery";
+    //   window.location.href=path;
+    //
+    // $scope.galleryOpen(index);
+    // };
 
-  $scope.galleryOpen(index);
-};
+    $scope.galleryOpen = function(index){
+      var issueObject = {
+        id:$scope.allIssues[index]._id,
+        number:$scope.allIssues[index].issue_number,
+        name:$scope.allIssues[index].issue_name,
+        pages:$scope.allIssues[index].issue_pages
+      };
+      console.log("issue object out: ", issueObject);
+      $http({   // gets recordset via GET
+        method: 'POST',
+        url: '/chooseIssue',
+        data: issueObject
+      });
+      var path = "#gallery";
+      window.location.href=path;
+    }; //end chooseIssue
 
-$scope.galleryOpen = function(index){
-  var issueObject = {
-    id:$scope.allIssues[index]._id,
-    number:$scope.allIssues[index].issue_number,
-    name:$scope.allIssues[index].issue_name,
-    pages:$scope.allIssues[index].issue_pages
-  };
-  console.log("issue object out: ", issueObject);
-  $http({   // gets recordset via GET
-    method: 'POST',
-    url: '/galleryPost',
-    data: issueObject
-  }).then(function(response){
-    $scope.issueToView = response.data;
-    console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
-  }, function myError( response ){
-    console.log(response.statusText);
-  }); //end post
-}; //end GalleryOpen
+  $scope.PagesBack = function(){
+    $http({
+      method:'GET',
+      url: '/pages'
+    }).then(function(response){
+      $scope.issueToView = response.data[0].pages;
+      console.log(response.data[0].pages, "response.data[0].pages");
+      console.log(response.data[0].pages[0].page_location);
+      // $scope.issueToView = response.config.data.pages[0];
+      // console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
+    }, function myError( response ){
+      console.log(response.statusText);
+    }); //end post
+    }; //end GalleryOpen
 
-}]);  //end myApp controller LibraryController
+    }]);  //end myApp controller LibraryController
 
 myApp.controller('homeController',['$scope', '$http', function($scope, $http){
   console.log('home loaded');
@@ -86,21 +98,7 @@ myApp.controller('adminController',[ '$scope', '$http', function( $scope, $http 
   console.log('admin loaded');
   event.preventDefault();
 
-  $scope.addedIssues = [];
-  //put this in a module please.
-  $scope.getIssues = function(){  // gets current recordset upon button click
-      $http({   // gets recordset via GET
-        method: 'GET',
-        url: '/getIssue',
-      }).then( function( response ){  // success call - runs function with response parameter
-        // console.log(response, "from GET");
-          $scope.addedIssues = response.data;  // pulls the data from app.js and sets to allTheRecords
-        }, function myError( response ){
-        console.log( response.statusText );
-      }); //end .then
-}; //end getIssues
 
-  event.preventDefault();
   $scope.addIssue = function(){ // adds issue on button click
 
     var objectToSend ={  // package object to send, with inputs
@@ -121,26 +119,4 @@ myApp.controller('adminController',[ '$scope', '$http', function( $scope, $http 
     $scope.issueThumbnailBinder = '';
     $scope.pagesBinder ='';
   }; // end addIssue function
-
-event.preventDefault();
-  $scope.updatePages = function(index){ // adds issue on button click
-
-    var pageObjectToSend ={
-      id:$scope.addedIssues[index]._id,
-      page_number: $scope.pageNumberBinder,
-      page_loction: $scope.pageLocationBinder,
-      page_thumbnail: $scope.pageThumbnailBinder,
-    }; //end objectToSend
-
-    $http({  // sends object via POST
-      method: 'POST',
-      url: '/updatePagePost',
-      data: pageObjectToSend
-    }); //end $http
-
-    $scope.pageNumberBinder =''; // clears input boxes
-    $scope.pageLocationBinder ='';
-    $scope.pageThumbnailBinder = '';
-  }; // end addIssue function
-
 }]); // end admin controller

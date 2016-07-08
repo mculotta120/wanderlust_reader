@@ -1,21 +1,19 @@
-<div  id="Gallery" class= "showIssues col-md-6" ng-repeat='record in issueToView'> >
-<div id="issue_information">
-    Issue # 001 "The issue's title of Doom"
+<div  id="Gallery" ng-init="PagesBack()">
+  <div id="issue_information" ng-repeat='record in allIssues'>
+    <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}
   </div>
-  <!-- <img ng-src="/images/Issue001/page_01.jpg" alt="Page 01" height= "500px" /> -->
-  <img ng-src="{{record.page_location}}" alt="{{record.page_number}}'s cover" height= "50px" />
-  <br>
-  <div id = galleryNav>
-  <button type="button" name="Prevbutton">Previous</button>
-    <a href="#library">Library</a>
-  <button type="button" name="Nextbutton">Next</button>
+  <div class= "showPage" >
+    <img ng-src="{{record.page_location}}" alt="page: {{record.page_number}}" height= "500px" />
+    <!-- navigation bar under page -->
+    <div id = galleryNav>
+      <button type="button" name="Prevbutton">Previous</button>
+        <a href="#library">Library</a>
+      <button type="button" name="Nextbutton">Next</button>
+    </div>
   </div>
-      <!-- <div id='displayIssues' ng-init="galleryOpen()">
-          <div class = "row">
-              <div class= "showIssues col-md-6" ng-repeat='record in issueToView'>
-                <div id="issue_information">
-                  {{record.issue_pages}}
-                </div> -->
-                <!-- <img ng-src="/images/Issue001/page_01.jpg" alt="Page 01" height= "500px" />
-                <img ng-src="/images/Issue001/page_02.jpg" alt="Page 01" height= "500px" /> -->
-              </div>
+  <!-- display thumbnails -->
+  <div class = "row">
+    <div class= "showIssues col-md-12" ng-repeat='record in issueToView'>
+    <img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" />
+    </div>
+  </div>

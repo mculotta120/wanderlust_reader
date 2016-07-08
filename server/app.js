@@ -38,33 +38,8 @@ app.post( '/testPost', function( req, res ){  // POST call
   newRecord.save();
 });
 
-// //post to update pagesArraySchema
-// app.post( '/updatePagePost', function( req, res ){  // POST call
-//   var pageToAdd={  // adds record from input
-//     id: req.body.id,
-//     page_number: req.body.page_number,
-//     page_Location: req.body.page_location,
-//     page_thumbnail:req.body.page_thumbnail,
-//   };
-//   console.log( req.body.id, " found.");
-//
-//   fa_issues.findByIdAndUpdate(req.body.id, {
-//     $set:{
-//     page_number: req.body.page_number,
-//     page_Location: req.body.page_location,
-//     page_thumbnail:req.body.page_thumbnail}},
-//     function(err, pageResult){
-//     if(err){
-//       console.log(err);
-//       res.sendStatus(500);
-//     }else{
-//       console.log('check mongoAdmin');
-//     res.sendStatus(200);
-//     }
-//   });
-// }); //end updatePagePost
-
-app.post( '/galleryPost', function( req, res ){  // POST call
+selectedIssue = [];
+app.post( '/chooseIssue', function( req, res ){  // POST call
   var displayIssueObject = {
     id:req.body.id,
     number:req.body.number,
@@ -78,7 +53,14 @@ app.post( '/galleryPost', function( req, res ){  // POST call
       res.sendStatus(500);
     }else{
     console.log(req.body.id, " found.", req.body.pages, "available");
+    selectedIssue.push(displayIssueObject);
+    console.log("selectedIssue", selectedIssue);
     res.sendStatus(200);
     }
-  });
+  }); //end post chooseIssue
+app.get('/pages', function( req, res ){
+console.log("I'm sending ", selectedIssue, " back to you.");
+  return res.json(selectedIssue);
+}); // end /pages get
+
 }); //end gallery post
