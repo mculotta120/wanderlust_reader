@@ -27,7 +27,9 @@ myApp.config(['$routeProvider', function($routeProvider){
 //create a controller
 myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
+    $scope.issueInfo = [];
     $scope.issueToView = [];
+    // $scope.issueEnd = issueToView.length;
     $scope.currentPageIndex = 0;
     event.preventDefault();
 
@@ -43,12 +45,6 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         }); //end .then
       }; //end getIssues
 
-    // $scope.openGalleryWindow = function(index){
-    //   var path = "#gallery";
-    //   window.location.href=path;
-    //
-    // $scope.galleryOpen(index);
-    // };
 
     $scope.galleryOpen = function(index){
       var issueObject = {
@@ -73,9 +69,10 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       url: '/pages'
     }).then(function(response){
       $scope.issueToView = response.data[0].pages;
+      $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
-      console.log(response.data[0].pages, "response.data[0].pages");
-      console.log(response.data[0].pages[0].page_location);
+      console.log(response.data[0], "response.data[0]");
+      // console.log(response.data[0].pages[0].page_location);
       // $scope.issueToView = response.config.data.pages[0];
       // console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
     }, function myError( response ){
@@ -86,15 +83,26 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     $scope.nextPage = function(){
       console.log("next clicked");
       $scope.currentPageIndex++;
+      if( $scope.currentPageIndex == $scope.issueToView.length ){
+        $scope.currentPageIndex = 0;
+      }
       console.log( $scope.currentPageIndex );
       $scope.PagesBack();
     };
     $scope.prevPage = function(){
     console.log("prev clicked");
       $scope.currentPageIndex--;
+      if( $scope.currentPageIndex === -1 ){
+        $scope.currentPageIndex = $scope.issueToView.length - 1;
+      }
       $scope.PagesBack();
     };
 
+    $scope.thumbnailPageOpen = function( index ){
+      $scope.currentPageIndex = index;
+      $scope.PagesBack();
+      console.log("clicked", $scope.currentPageIndex, "= number");
+    };
     }]);  //end myApp controller LibraryController
 
 myApp.controller('homeController',['$scope', '$http', function($scope, $http){
