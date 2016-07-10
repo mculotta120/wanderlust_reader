@@ -72,6 +72,8 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.issueToView = response.data[0].pages;
       $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
+      $scope.currentPanel = $scope.currentPage.page_panels[0];
+      console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
       console.log(response.data[0], "response.data[0]");
       // console.log(response.data[0].pages[0].page_location);
       // $scope.issueToView = response.config.data.pages[0];

@@ -4,9 +4,15 @@
   <div id="issue_information">
     <b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}
   </div>
-
+  <!-- show the page -->
   <div class= "showPage" >
-    <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}" height= "500px" />
+    <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}"  usemap="#Map" />
+    <map name="Map" id="Map">
+        <area alt="panel 01" title="panel 01" nohref ng-click="toggleModal()" shape="rect" coords="4,5,595,616" />
+        <area alt="panel 02" title="panel 02" nohref ng-click="toggleModal()" shape="rect" coords="6,625,284,897" />
+        <area alt="panel 03" title="panel 03" nohref ng-click="toggleModal()" shape="rect" coords="293,624,590,896" />
+    </map>
+    <!-- page number display -->
     <p>page number: {{ currentPage.page_number}}</p>
     <!-- navigation bar under page -->
     <div id = galleryNav>
@@ -14,21 +20,28 @@
         <a href="#library">Library</a>
       <button type="button" name="Nextbutton" ng-click= "nextPage()">Next</button>
     </div>
+    <!-- panel mode button -->
     <div ng-app='ModalDemo'>
       <div ng-controller='MyCtrl'>
-        <button ng-click='toggleModal()'>Open Modal Dialog</button>
+        <button ng-click='toggleModal()'>Panel-by-Panel Mode</button>
         <modal-dialog show='modalShown' width='700px' height='80%'>
-          <img ng-src="{{ currentPage.page_location }}" alt="panel number: {{ currentPage.page_number}}" height= "100px" />
-
+          <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
+          <p>panel number: {{ currentPanel.panel_number}}</p>
+          <!-- display panel thumbnails -->
           <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
             <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+          </div>
+          <!-- navigation in panel mode -->
+          <div id = galleryNav>
+            <button type="button" name="Prevbutton" ng-click= "prevPage()">Previous</button>
+            <button type="button" name="Nextbutton" ng-click= "nextPage()">Next</button>
           </div>
 
         </modal-dialog>
       </div>
     </div>
   </div>
-  <!-- display thumbnails -->
+  <!-- display page thumbnails -->
   <div class = "row">
     <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
       <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
