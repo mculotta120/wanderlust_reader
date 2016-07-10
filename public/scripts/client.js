@@ -2,6 +2,7 @@ console.log("client.js is sourced");
 
 // create an ng app for the page
 var myApp = angular.module( 'myApp', ['ngRoute'] );
+
 myApp.config(['$routeProvider', function($routeProvider){
   $routeProvider.
       when("/home", {
@@ -93,7 +94,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     console.log("prev clicked");
       $scope.currentPageIndex--;
       if( $scope.currentPageIndex === -1 ){
-        $scope.currentPageIndex = $scope.issueToView.length - 1;
+        $scope.currentPageIndex = 0;
       }
       $scope.PagesBack();
     };
@@ -104,6 +105,35 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       console.log("clicked", $scope.currentPageIndex, "= number");
     };
     }]);  //end myApp controller LibraryController
+
+    myApp.directive('modalDialog', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      show: '='
+    },
+    replace: true, // Replace with the template below
+    transclude: true, // we want to insert custom content inside the directive
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width)
+        scope.dialogStyle.width = attrs.width;
+      if (attrs.height)
+        scope.dialogStyle.height = attrs.height;
+      scope.hideModal = function() {
+        scope.show = false;
+      };
+    },
+    template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+  };
+});
+
+myApp.controller('MyCtrl', ['$scope', function($scope) {
+  $scope.modalShown = false;
+  $scope.toggleModal = function() {
+    $scope.modalShown = !$scope.modalShown;
+  };
+}]);
 
 myApp.controller('homeController',['$scope', '$http', function($scope, $http){
   console.log('home loaded');

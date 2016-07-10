@@ -1,7 +1,10 @@
+
 <div  id="Gallery" ng-init="PagesBack()">
+
   <div id="issue_information">
     <b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}
   </div>
+
   <div class= "showPage" >
     <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}" height= "500px" />
     <p>page number: {{ currentPage.page_number}}</p>
@@ -11,10 +14,25 @@
         <a href="#library">Library</a>
       <button type="button" name="Nextbutton" ng-click= "nextPage()">Next</button>
     </div>
+    <div ng-app='ModalDemo'>
+      <div ng-controller='MyCtrl'>
+        <button ng-click='toggleModal()'>Open Modal Dialog</button>
+        <modal-dialog show='modalShown' width='700px' height='80%'>
+          <img ng-src="{{ currentPage.page_location }}" alt="panel number: {{ currentPage.page_number}}" height= "100px" />
+
+          <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
+            <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+          </div>
+
+        </modal-dialog>
+      </div>
+    </div>
   </div>
   <!-- display thumbnails -->
   <div class = "row">
     <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
       <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
     </div>
+
   </div>
+</div>
