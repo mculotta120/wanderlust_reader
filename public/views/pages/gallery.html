@@ -28,10 +28,10 @@
         <button ng-click='toggleModal()'>Panel-by-Panel Mode</button>
           <modal-dialog show='modalShown' width='700px' height='80%'>
           <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
-          <p>panel number: {{ currentPanel.panel_number}}</p>
+          <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
             <!-- display panel thumbnails -->
             <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
-              <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+              <button type="button" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
             </div>
             <!-- navigation in panel mode -->
             <div id = galleryNav>

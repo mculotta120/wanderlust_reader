@@ -107,13 +107,12 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     $scope.thumbnailPageOpen = function( index ){
       $scope.currentPageIndex = index;
       $scope.PagesBack();
-      console.log("clicked", $scope.currentPageIndex, "= number");
     }; //end thumbnailPageOpen
 
     $scope.nextPanel = function(){
       $scope.currentPanelIndex++;
       if($scope.currentPanelIndex === $scope.panelToView.length){
-        $scope.currentPageIndex++;
+        $scope.nextPage();
         $scope.currentPanelIndex = 0;
       }
       $scope.PagesBack();
@@ -122,11 +121,16 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     $scope.prevPanel = function(){
       $scope.currentPanelIndex--;
       if($scope.currentPanelIndex === -1){
-        $scope.currentPageIndex--;
-        $scope.currentPanelIndex = 0;
+        $scope.currentPanelIndex = $scope.panelToView.length - 1;
+        $scope.prevPage();
       }
       $scope.PagesBack();
     }; // end nextPanel
+
+    $scope.thumbnailPanelOpen = function( index ){
+      $scope.currentPanelIndex = index;
+      $scope.PagesBack();
+    }; //end thumbnailPanelOpen
     }]);  //end myApp controller LibraryController
 
     myApp.directive('modalDialog', function() {
