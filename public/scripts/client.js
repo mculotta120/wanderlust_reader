@@ -48,13 +48,14 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       }; //end getIssues
 
 
-    $scope.galleryOpen = function(index){
+    $scope.galleryOpen = function( index ){
       var issueObject = {
         id:$scope.allIssues[index]._id,
         number:$scope.allIssues[index].issue_number,
         name:$scope.allIssues[index].issue_name,
         pages:$scope.allIssues[index].issue_pages
       };
+      $scope.currentPageIndex = index;
       console.log("issue object out: ", issueObject);
       $http({   // gets recordset via GET
         method: 'POST',
@@ -75,8 +76,8 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
       $scope.panelToView = $scope.currentPage.page_panels;
       $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
-      console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
-      console.log($scope.currentPage, "currentPage");
+      // console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
+      // console.log($scope.currentPage, "currentPage");
       // console.log(response.data[0].pages[0].page_location);
       // $scope.issueToView = response.config.data.pages[0];
       // console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
@@ -123,18 +124,23 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       if($scope.currentPanelIndex === -1){
         $scope.currentPanelIndex = $scope.panelToView.length - 1;
         $scope.prevPage();
+        console.log($scope.currentPanelIndex, "nextbutton");
       }
       $scope.PagesBack();
     }; // end nextPanel
 
     $scope.thumbnailPanelOpen = function( index ){
       $scope.currentPanelIndex = index;
+      console.log($scope.currentPanelIndex);
       $scope.PagesBack();
     }; //end thumbnailPanelOpen
+
+    // $scope.showComment = function(){
+    //   alert( $scope.currentPanel.panel_commentary );
+    // };
     }]);  //end myApp controller LibraryController
 
-    myApp.directive('modalDialog', function() {
-      console.log("modal function hit");
+    myApp.directive('modalDialog', function(  ) {
   return {
     restrict: 'E',
     scope: {
@@ -158,10 +164,17 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
 
 myApp.controller('MyCtrl', ['$scope', function($scope) {
   $scope.modalShown = false;
-  $scope.toggleModal = function() {
-    console.log("toggleModal clicked");
+  $scope.toggleModal = function( ) {
     $scope.modalShown = !$scope.modalShown;
   };
+  $scope.openModal = function(number){
+    $scope.currentPanelIndex = number ;
+    console.log($scope.currentPanelIndex);
+    $scope.PagesBack();
+    $scope.toggleModal();
+  }; // end openModal
+
+
 }]);
 
 myApp.controller('homeController',['$scope', '$http', function($scope, $http){

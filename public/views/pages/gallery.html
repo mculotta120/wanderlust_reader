@@ -21,18 +21,23 @@
     <div ng-app='ModalDemo'>
       <div ng-controller='MyCtrl'>
         <map name="Map" id="Map">
-            <area alt="panel 01" title="panel 01"  ng-click="toggleModal()" nohref shape="rect" coords="4,5,595,616" />
-            <area alt="panel 02" title="panel 02"  ng-click="toggleModal()" nohref shape="rect" coords="6,625,284,897" />
-            <area alt="panel 03" title="panel 03"  ng-click="toggleModal()" nohref shape="rect" coords="293,624,590,896" />
+            <area alt="panel 01" title="panel 01"  ng-click="openModal( 0 )" nohref shape="rect" coords="4,5,595,616" />
+            <area alt="panel 02" title="panel 02"  ng-click="openModal( 1 )" nohref shape="rect" coords="6,625,284,897" />
+            <area alt="panel 03" title="panel 03"  ng-click="openModal( 2 )" nohref shape="rect" coords="293,624,590,896" />
         </map>
         <button ng-click='toggleModal()'>Panel-by-Panel Mode</button>
           <modal-dialog show='modalShown' width='700px' height='80%'>
+            <div id="galleryImg">
           <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
+            </div>
           <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
             <!-- display panel thumbnails -->
             <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
               <button type="button" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
             </div>
+            <!-- <div class= "showComment" ng-show="currentPanel.pannel_comment == 'true'">
+              <button type="button" name="commentButton" ng-click="showComment()"><img ng-src="/images/comment.png" alt="comment available" /></button>
+            </div> -->
             <!-- navigation in panel mode -->
             <div id = galleryNav>
               <button type="button" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
