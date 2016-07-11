@@ -33,6 +33,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     $scope.panelToView = [];
     $scope.currentPageIndex = 0;
     $scope.currentPanelIndex= 0;
+
     event.preventDefault();
 
     $scope.getIssues = function(){  // gets current recordset upon button click
@@ -76,6 +77,8 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
       $scope.panelToView = $scope.currentPage.page_panels;
       $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
+      $scope.commentVar = $scope.currentPanel.panel_comment;
+      // $scope.commentText = false;
       // console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
       // console.log($scope.currentPage, "currentPage");
       // console.log(response.data[0].pages[0].page_location);
@@ -135,9 +138,10 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.PagesBack();
     }; //end thumbnailPanelOpen
 
-    // $scope.showComment = function(){
-    //   alert( $scope.currentPanel.panel_commentary );
-    // };
+    $scope.toggle = function() {
+        $scope.commentText = !$scope.commentText;
+    };
+
     }]);  //end myApp controller LibraryController
 
     myApp.directive('modalDialog', function(  ) {

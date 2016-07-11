@@ -35,15 +35,15 @@
             <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
               <button type="button" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
             </div>
-            <!-- <div class= "showComment" ng-show="currentPanel.pannel_comment == 'true'">
-              <button type="button" name="commentButton" ng-click="showComment()"><img ng-src="/images/comment.png" alt="comment available" /></button>
-            </div> -->
+            <div class= "showComment" ng-show="commentVar == 'true'">
+              <button type="button" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
+              <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
+              </div>
             <!-- navigation in panel mode -->
             <div id = galleryNav>
               <button type="button" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
               <button type="button" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
             </div>
-
         </modal-dialog>
       </div>
     </div>
