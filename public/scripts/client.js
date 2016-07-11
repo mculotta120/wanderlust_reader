@@ -20,18 +20,19 @@ myApp.config(['$routeProvider', function($routeProvider){
       when("/admin", {
         templateUrl: "/views/pages/admin.html",
         controller: "adminController"
-      }).
-      otherwise({
-        redirectTo: "/home"
       });
+      // otherwise({
+      //   redirectTo: "/home"
+      // });
 }]);
 //create a controller
 myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $http ){
     $scope.allIssues = [];
     $scope.issueInfo = [];
     $scope.issueToView = [];
-    // $scope.issueEnd = issueToView.length;
+    $scope.panelToView = [];
     $scope.currentPageIndex = 0;
+    $scope.currentPanelIndex= 0;
     event.preventDefault();
 
     $scope.getIssues = function(){  // gets current recordset upon button click
@@ -72,9 +73,10 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.issueToView = response.data[0].pages;
       $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
-      $scope.currentPanel = $scope.currentPage.page_panels[0];
+      $scope.panelToView = $scope.currentPage.page_panels;
+      $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
       console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
-      console.log(response.data[0], "response.data[0]");
+      console.log($scope.currentPage, "currentPage");
       // console.log(response.data[0].pages[0].page_location);
       // $scope.issueToView = response.config.data.pages[0];
       // console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
@@ -82,6 +84,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       console.log(response.statusText);
     }); //end post
     }; //end GalleryOpen
+
 
     $scope.nextPage = function(){
       console.log("next clicked");
@@ -91,7 +94,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       }
       console.log( $scope.currentPageIndex );
       $scope.PagesBack();
-    };
+    };// end nextPage
     $scope.prevPage = function(){
     console.log("prev clicked");
       $scope.currentPageIndex--;
@@ -99,16 +102,35 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         $scope.currentPageIndex = 0;
       }
       $scope.PagesBack();
-    };
+    }; //end prevPage
 
     $scope.thumbnailPageOpen = function( index ){
       $scope.currentPageIndex = index;
       $scope.PagesBack();
       console.log("clicked", $scope.currentPageIndex, "= number");
-    };
+    }; //end thumbnailPageOpen
+
+    $scope.nextPanel = function(){
+      $scope.currentPanelIndex++;
+      if($scope.currentPanelIndex === $scope.panelToView.length){
+        $scope.currentPageIndex++;
+        $scope.currentPanelIndex = 0;
+      }
+      $scope.PagesBack();
+    }; // end nextPanel
+
+    $scope.prevPanel = function(){
+      $scope.currentPanelIndex--;
+      if($scope.currentPanelIndex === -1){
+        $scope.currentPageIndex--;
+        $scope.currentPanelIndex = 0;
+      }
+      $scope.PagesBack();
+    }; // end nextPanel
     }]);  //end myApp controller LibraryController
 
     myApp.directive('modalDialog', function() {
+      console.log("modal function hit");
   return {
     restrict: 'E',
     scope: {
@@ -133,6 +155,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
 myApp.controller('MyCtrl', ['$scope', function($scope) {
   $scope.modalShown = false;
   $scope.toggleModal = function() {
+    console.log("toggleModal clicked");
     $scope.modalShown = !$scope.modalShown;
   };
 }]);
