@@ -9,11 +9,11 @@ app.use( bodyParser.json() );
 
 mongoose.connect('localhost:/wanderlustdb');
 
+app.use( express.static( 'public' ) );
+
 app.get( '/', function( req, res ){    // set basic url
   res.sendFile( path.resolve( 'views/index.html' ) );
 });
-
-app.use( express.static( 'public' ) );
 
 app.listen( 8080, 'localhost', function( req, res ){ // spins up server
   console.log( 'listening on 8080' );

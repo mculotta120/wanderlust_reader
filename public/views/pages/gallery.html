@@ -13,7 +13,7 @@
       <p><b>page number: {{ currentPage.page_number}} </b></p>
       <div class="container">
         <div class="row">
-          <div class="col-sm-4 center-block">
+          <div class="col-sm-4 text-center">
             <button type="button" class="btn btn-danger" name="Prevbutton" ng-click= "prevPage()">Previous</button>
               <a href="#library"><b>Library</b></a>
             <button type="button" class="btn btn-danger" name="Nextbutton" ng-click= "nextPage()">Next</button>
@@ -24,7 +24,7 @@
       <!-- display page thumbnails -->
       <div class= "container">
         <div class = "row" id= "pageThumbnails">
-          <div class= "col-xs-1 center-block" ng-repeat='record in issueToView'>
+          <div class= "col-xs-1 text-center" ng-repeat='record in issueToView'>
             <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
           </div>
         </div>
@@ -45,7 +45,8 @@
               <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
             </div>
             <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
-          <!-- commentary mode toggle -->
+
+            <!-- commentary mode toggle -->
             <div class= "showComment" ng-show="commentVar == 'true'">
               <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
               <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>

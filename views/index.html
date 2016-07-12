@@ -6,8 +6,12 @@
     <script src="vendors/angular.min.js" type="text/javascript"></script>
     <script type="text/javascript" src= "/vendors/angular-route.js"></script>
     <script src="scripts/client.js" type="text/javascript"></script>
+    <script src="scripts/controllers/libraryController.js" type="text/javascript"></script>
+    <script src="scripts/controllers/homeController.js" type="text/javascript"></script>
+    <script src="scripts/controllers/adminController.js" type="text/javascript"></script>
     <link rel="stylesheet" href= "vendors/bootstrap.min.css"/>
     <link rel="stylesheet" href= "/stylesheets/main.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Cutive+Mono|Podkova' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Averia+Serif+Libre' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -17,47 +21,6 @@
     <main ng-view></main>
     <body ng-controller = 'libraryController'>
 
-
-   <!-- <div ng-init="tab=1" >
-     <div class="container">
-       <div class= "buttonTab">
-         <button class="btn btn-danger" ng-click="tab = 1"> View Library </button>
-         <button class="btn btn-danger" ng-click="tab = 2"> Administrator Add Issue</button>
-         <button class="btn btn-danger" ng-click="tab = 3"> Gallery</button>
-       </div>
-   </div> -->
-     <!-- <div ng-show="tab == 1" id= "displayIssues" class="container" ng-init="getIssues()">
-       <h2>Available Issues</h2>
-         <div class = "row">
-             <div class= "showIssues col-md-6" ng-repeat='record in allIssues'>
-               <h4><b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}
-                <button class="btn btn-danger" ng-click= "galleryOpen($index)"><img ng-src="{{record.issue_thumbnail}}" alt="{{record.issue_name}}'s cover" height= "50px" /></button></h4>
-                <div class= "showIssues col-md-6" ng-repeat='issue in IssuetoView'>
-                  <b> Page: </b> {{ issue.pages }}
-                </div>
-              </div>
-
-          </div>
-      </div> -->
-
-      <!-- <div ng-show="tab == 2" id= "addIssue">
-           <div  id="addIn" >
-              <h2> Add Issues to DB</h2>
-             <input type= "text" ng-model= "issueNumberBinder" value= "" placeholder="Issue Number" required>
-             <input type= "text" ng-model= "issueNameBinder" value= "" placeholder="Issue Name" required>
-             <input type="text" ng-model="issueThumbnailBinder"  value="" placeholder="Issue Thumbnail" required>
-             <input type= "text" ng-model= "pagesBinder" value= "" placeholder="Issue Pages" required>
-             <button class="btn btn-danger" ng-click= "addIssue()" >Submit</button>
-          </div>
-      </div> -->
-
-      <!-- <div ng-show="tab == 3" id= "GalleryView">
-           <div  id="Gallery" >
-              <h2> this is the gallery</h2>
-
-          </div>
-      </div>
-</div> -->
 
   </body>
 </html>
