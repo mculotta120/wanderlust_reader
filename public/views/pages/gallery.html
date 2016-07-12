@@ -1,58 +1,73 @@
 
 <div  id="Gallery" ng-init="PagesBack()">
-
   <div id="issue_information">
-    <b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}
+    <p><b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}</p>
   </div>
   <!-- show the page -->
-  <div class= "showPage" >
+  <div id= "showPage" >
     <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}"  usemap="#Map" />
-
-
-    <!-- page number display -->
-    <p>page number: {{ currentPage.page_number}}</p>
+  </div>
     <!-- navigation bar under page -->
     <div id = galleryNav>
-      <button type="button" name="Prevbutton" ng-click= "prevPage()">Previous</button>
-        <a href="#library">Library</a>
-      <button type="button" name="Nextbutton" ng-click= "nextPage()">Next</button>
+      <!-- page number display -->
+      <p><b>page number: {{ currentPage.page_number}} </b></p>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 center-block">
+            <button type="button" class="btn btn-danger" name="Prevbutton" ng-click= "prevPage()">Previous</button>
+              <a href="#library"><b>Library</b></a>
+            <button type="button" class="btn btn-danger" name="Nextbutton" ng-click= "nextPage()">Next</button>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- display page thumbnails -->
+      <div class= "container">
+        <div class = "row" id= "pageThumbnails">
+          <div class= "col-xs-1 center-block" ng-repeat='record in issueToView'>
+            <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+          </div>
+        </div>
+        </div>
     </div>
-    <!-- panel mode button -->
+
+    <!-- panel modal -->
     <div ng-app='ModalDemo'>
       <div ng-controller='MyCtrl'>
+        <div classm "mapDiv" ng-repeat='record in imageMaps'>
         <map name="Map" id="Map">
-            <area alt="panel 01" title="panel 01"  ng-click="openModal( 0 )" nohref shape="rect" coords="4,5,595,616" />
-            <area alt="panel 02" title="panel 02"  ng-click="openModal( 1 )" nohref shape="rect" coords="6,625,284,897" />
-            <area alt="panel 03" title="panel 03"  ng-click="openModal( 2 )" nohref shape="rect" coords="293,624,590,896" />
+            <area title="{{record.altText}}" alt="{{record.altText}}" ng-click="openModal(record.click)" nohref shape="rect" coords="{{record.coords}}" />
         </map>
-        <button ng-click='toggleModal()'>Panel-by-Panel Mode</button>
-          <modal-dialog show='modalShown' width='700px' height='80%'>
+        </div>
+              <button class="btn btn-danger" ng-click='toggleModal()'>View Panel-by-Panel</button>
+              <modal-dialog show='modalShown' width='80%' height='80%'>
             <div id="galleryImg">
-          <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
+              <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "100px" />
             </div>
-          <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
-            <!-- display panel thumbnails -->
-            <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
-              <button type="button" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
-            </div>
+            <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
+          <!-- commentary mode toggle -->
             <div class= "showComment" ng-show="commentVar == 'true'">
-              <button type="button" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
+              <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
               <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
-              </div>
+            </div>
+
             <!-- navigation in panel mode -->
             <div id = galleryNav>
-              <button type="button" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
-              <button type="button" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
+              <button type="button" class="btn btn-danger" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
+              <button type="button" class="btn btn-danger" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
             </div>
-        </modal-dialog>
+
+            <!-- display panel thumbnails -->
+            <div class="container">
+              <div class = "row" id= "panelThumbnails">
+                <div class= "showIssues col-xs-1" ng-repeat='record in issueToView'>
+              <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+                </div>
+              </div>
+            </div>
+          </modal-dialog>
       </div>
     </div>
   </div>
-  <!-- display page thumbnails -->
-  <div class = "row">
-    <div class= "showIssues col-md-8" ng-repeat='record in issueToView'>
-      <button type="button" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
-    </div>
 
-  </div>
 </div>

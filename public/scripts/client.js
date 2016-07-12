@@ -31,6 +31,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     $scope.issueInfo = [];
     $scope.issueToView = [];
     $scope.panelToView = [];
+    $scope.imageMaps = [];
     $scope.currentPageIndex = 0;
     $scope.currentPanelIndex= 0;
 
@@ -75,13 +76,14 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       $scope.issueToView = response.data[0].pages;
       $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
+      $scope.imageMaps = $scope.currentPage.page_coordinates[$scope.currentPageIndex];
       $scope.panelToView = $scope.currentPage.page_panels;
       $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
       $scope.commentVar = $scope.currentPanel.panel_comment;
-      // $scope.commentText = false;
+      console.log($scope.imageMaps.click, $scope.imageMaps.coords, $scope.imageMaps.altText, "test");
       // console.log($scope.currentPage.page_panels[0].panel_location, " is the currentPage first panel");
       // console.log($scope.currentPage, "currentPage");
-      // console.log(response.data[0].pages[0].page_location);
+      // console.log(response.data[0].pages, "response.data");
       // $scope.issueToView = response.config.data.pages[0];
       // console.log("page number: ", response.config.data.pages[0].page_number, "page location: ", response.config.data.pages[0].page_location, " is back from POST");
     }, function myError( response ){
