@@ -41,22 +41,20 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
     }; //end chooseIssue
 
   $scope.PagesBack = function(){
-    console.log( '--- === uhhh hello????' );
+    // console.log( '--- === uhhh hello????' );
     $http({
       method:'GET',
       url: '/pages'
     }).then(function(response){
-      console.log( '--- === back from get', response.data );
       $scope.issueToView = response.data[0].pages;
       $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
+      console.log($scope.currentPage, "currentPage");
       $scope.imageMaps = $scope.currentPage.page_coordinates[$scope.currentPageIndex];
-      console.log( response.data, "responese.data");
-        console.log( '--- === how did I get here?' );
       $scope.panelToView = $scope.currentPage.page_panels;
       $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
       $scope.commentVar = $scope.currentPanel.panel_comment;
-      console.log($scope.imageMaps.click, $scope.imageMaps.coords, $scope.imageMaps.altText, "test");
+      // console.log($scope.imageMaps.click, $scope.imageMaps.coords, $scope.imageMaps.altText, "test");
     }, function myError( response ){
       console.log(response.statusText);
     }); //end post
