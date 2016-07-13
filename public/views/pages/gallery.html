@@ -24,7 +24,7 @@
       <!-- display page thumbnails -->
       <div class= "container">
         <div class = "row" id= "pageThumbnails">
-          <div class= "col-xs-1 text-center" ng-repeat='record in issueToView'>
+          <div class= "col-xs-1 text-center" ng-repeat='record in issueToView track by $index'>
             <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
           </div>
         </div>
@@ -33,12 +33,12 @@
 
     <!-- panel modal -->
     <div ng-app='ModalDemo'>
-      <div ng-controller='MyCtrl'>
+      <!-- <div ng-controller='MyCtrl'>
         <div classm "mapDiv" ng-repeat='record in imageMaps'>
         <map name="Map" id="Map">
             <area title="{{record.altText}}" alt="{{record.altText}}" ng-click="openModal(record.click)" nohref shape="rect" coords="{{record.coords}}" />
         </map>
-        </div>
+        </div> -->
               <button class="btn btn-danger" ng-click='toggleModal()'>View Panel-by-Panel</button>
               <modal-dialog show='modalShown' width='80%' height='80%'>
             <div id="galleryImg">
@@ -61,7 +61,7 @@
             <!-- display panel thumbnails -->
             <div class="container">
               <div class = "row" id= "panelThumbnails">
-                <div class= "showIssues col-xs-1" ng-repeat='record in issueToView'>
+                <div class= "showIssues col-xs-1" ng-repeat='record in issueToView track by $index'>
               <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
                 </div>
               </div>
@@ -70,5 +70,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -5,15 +5,52 @@ var bodyParser = require('body-parser');  // require bodyparser for POST calls
 var fa_issues=require('../models/fa_issueColl.js');  // requiring the fa_issueColl model
 var mongoose = require('mongoose');  // require mongoose for mongo db
 
+var passport = require('../strategy/userStrategy');
+var session = require('express-session');
+
+// Routes
+var index = require('../routes/index');
+var user = require('../routes/user');
+var register = require('../routes/register');
+
 app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect('localhost:/wanderlustdb');
 
-app.use( express.static( 'public' ) );
 
-app.get( '/', function( req, res ){    // set basic url
-  res.sendFile( path.resolve( 'views/index.html' ) );
+app.use(express.static( 'public'));
+// console.log(__dirname, '/public');
+// Passport Session Configuration //
+app.use(session({
+   secret: 'secret',
+   key: 'user',
+   resave: 'true',
+   saveUninitialized: false,
+   cookie: { maxage: 60000, secure: false }
+}));
+
+// start up passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Mongo Connection //
+// mongoose.connect('localhost:/wanderlustdb');
+var mongoURI = "mongodb://localhost:/wanderlustdb";
+var mongoDB = mongoose.connect(mongoURI).connection;
+
+mongoDB.on('error', function(err){
+   if(err) {
+     console.log("MONGO ERROR: ", err);
+   }
 });
+
+mongoDB.once('open', function(){
+   console.log("Connected to Mongo");
+});
+
+// app.get( '/', function( req, res ){    // set basic url
+//   res.sendFile( path.resolve( 'views/index.html' ) );
+// });
 
 app.listen( 8080, 'localhost', function( req, res ){ // spins up server
   console.log( 'listening on 8080' );
@@ -26,7 +63,7 @@ app.get( '/getIssue', function( req, res ){  // GET function to retrieve Issues
   });
 });
 
-//adds issue to wanderlustdb --> fa_issues
+//adds issue to wanderlustdb  fa_issues
 app.post( '/testPost', function( req, res ){  // POST call
   var recordToAdd={  // adds record from input
     issue_number: req.body.issue_number,
@@ -40,27 +77,34 @@ app.post( '/testPost', function( req, res ){  // POST call
 
 selectedIssue = [];
 app.post( '/chooseIssue', function( req, res ){  // POST call
+  // selectedIssue = [];
   var displayIssueObject = {
     id:req.body.id,
     number:req.body.number,
     name:req.body.name,
     pages:req.body.pages
   };
-  // console.log("here is ",displayIssueObject.pages);
+  console.log("here is ",displayIssueObject.pages);
   fa_issues.findOne({_id:req.body.id}, function(err, issueResult){
     if(err){
       console.log(err);
       res.sendStatus(500);
     }else{
-    // console.log(req.body.id, " found.", req.body.pages, "available");
+    console.log(req.body.id, " found.", req.body.pages, "available");
     selectedIssue.push(displayIssueObject);
-    // console.log("selectedIssue", selectedIssue);
+    console.log("selectedIssue", selectedIssue);
     res.sendStatus(200);
     }
   }); //end post chooseIssue
+
+}); //end gallery post
+
 app.get('/pages', function( req, res ){
-// console.log("I'm sending ", selectedIssue, " back to you.");
+console.log("I'm sending ", selectedIssue, " back to you.");
   return res.json(selectedIssue);
 }); // end /pages get
 
-}); //end gallery post
+// Routes
+app.use('/register', register);
+app.use('/user', user);
+app.use('/*', index);
