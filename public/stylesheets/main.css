@@ -25,6 +25,15 @@ a{
   text-decoration: bold;
   text-decoration-color: currentColor;
 }
+a:link {
+color: #B43200;
+}
+a:visited {
+color: #6B0000;
+}
+a:hover {
+color: #6B0000;
+}
 header{
   position: fixed;
   background-color: black;
@@ -60,7 +69,7 @@ footer{
 }
 #welcomeText{
   background-color: white;
-  padding: 40px;
+  padding: 100px;
   margin: 50px;
 }
 #Gallery{
@@ -94,7 +103,7 @@ footer{
 }
 
 #galleryImg img:active {
-    -webkit-transform: scale(5);
+    -webkit-transform: scale(2);
     /*margin: auto;*/
 }
 #modalButtonDiv{
