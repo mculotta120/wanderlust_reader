@@ -75,9 +75,8 @@ app.post( '/testPost', function( req, res ){  // POST call
   newRecord.save();
 });
 
-selectedIssue = [];
 app.post( '/chooseIssue', function( req, res ){  // POST call
-  // selectedIssue = [];
+  selectedIssue = [];
   var displayIssueObject = {
     id:req.body.id,
     number:req.body.number,
@@ -98,6 +97,7 @@ app.post( '/chooseIssue', function( req, res ){  // POST call
   }); //end post chooseIssue
 
 }); //end gallery post
+// console.log(selectedIssue, "between post and get");
 
 app.get('/pages', function( req, res ){
 console.log("I'm sending ", selectedIssue, " back to you.");

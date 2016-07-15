@@ -40,17 +40,17 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       window.location.href=path;
     }; //end chooseIssue
 
-  $scope.PagesBack = function(){
-    // console.log( '--- === uhhh hello????' );
+  $scope.pagesBack = function(){
     $http({
       method:'GET',
       url: '/pages'
     }).then(function(response){
+      console.log(response, "response");
       $scope.issueToView = response.data[0].pages;
       $scope.issueInfo = response.data[0];
       $scope.currentPage = $scope.issueToView[$scope.currentPageIndex];
       console.log($scope.currentPage, "currentPage");
-      $scope.imageMaps = $scope.currentPage.page_coordinates[$scope.currentPageIndex];
+      // $scope.imageMaps = $scope.currentPage.page_coordinates[$scope.currentPageIndex];
       $scope.panelToView = $scope.currentPage.page_panels;
       $scope.currentPanel = $scope.panelToView[$scope.currentPanelIndex];
       $scope.commentVar = $scope.currentPanel.panel_comment;
@@ -68,7 +68,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         $scope.currentPageIndex = 0;
       }
       console.log( $scope.currentPageIndex );
-      $scope.PagesBack();
+      $scope.pagesBack();
     };// end nextPage
     $scope.prevPage = function(){
     console.log("prev clicked");
@@ -76,12 +76,12 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
       if( $scope.currentPageIndex === -1 ){
         $scope.currentPageIndex = 0;
       }
-      $scope.PagesBack();
+      $scope.pagesBack();
     }; //end prevPage
 
     $scope.thumbnailPageOpen = function( index ){
       $scope.currentPageIndex = index;
-      $scope.PagesBack();
+      $scope.pagesBack();
     }; //end thumbnailPageOpen
 
     $scope.nextPanel = function(){
@@ -90,7 +90,7 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         $scope.nextPage();
         $scope.currentPanelIndex = 0;
       }
-      $scope.PagesBack();
+      $scope.pagesBack();
     }; // end nextPanel
 
     $scope.prevPanel = function(){
@@ -100,13 +100,13 @@ myApp.controller( 'libraryController', [ '$scope', '$http', function( $scope, $h
         $scope.prevPage();
         console.log($scope.currentPanelIndex, "nextbutton");
       }
-      $scope.PagesBack();
+      $scope.pagesBack();
     }; // end nextPanel
 
     $scope.thumbnailPanelOpen = function( index ){
       $scope.currentPanelIndex = index;
       console.log($scope.currentPanelIndex);
-      $scope.PagesBack();
+      $scope.pagesBack();
     }; //end thumbnailPanelOpen
 
     $scope.toggle = function() {
@@ -145,7 +145,7 @@ myApp.controller('MyCtrl', ['$scope', function($scope) {
   $scope.openModal = function(number){
     $scope.currentPanelIndex = number ;
     console.log($scope.currentPanelIndex);
-    $scope.PagesBack();
+    $scope.pagesBack();
     $scope.toggleModal();
   }; // end openModal
 

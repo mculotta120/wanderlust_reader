@@ -1,5 +1,4 @@
-
-<div  id="Gallery" ng-init="PagesBack()">
+<div  id="Gallery" ng-init="pagesBack()">
   <div id="issue_information">
     <p><b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}</p>
   </div>
@@ -47,10 +46,10 @@
             <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
 
             <!-- commentary mode toggle -->
-            <div class= "showComment" ng-show="commentVar == 'true'">
+            <!-- <div class= "showComment" ng-show="commentVar == 'true'">
               <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
               <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
-            </div>
+            </div> -->
 
             <!-- navigation in panel mode -->
             <div id = galleryNav>
@@ -61,8 +60,8 @@
             <!-- display panel thumbnails -->
             <div class="container">
               <div class = "row" id= "panelThumbnails">
-                <div class= "showIssues col-xs-1" ng-repeat='record in issueToView track by $index'>
-              <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+                <div class= "showIssues col-xs-1" ng-repeat='record in panelToView track by $index'>
+              <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.panel_thumbnail}}" alt="{{record.panel_number}}'s thumbnail" height= "50px" /></button>
                 </div>
               </div>
             </div>
