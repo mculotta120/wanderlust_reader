@@ -2,39 +2,45 @@
   <div id="issue_information">
     <p><b>Issue Number:  </b> {{ issueInfo.number }} <b> Title: </b> {{ issueInfo.name }}</p>
   </div>
-  <!-- show the page -->
-  <div id= "showPage" >
-    <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}"  usemap="#Map" />
-  </div>
-
+    <!-- show the page -->
+      <div id= "showPage text-center">
+        <img ng-src="{{ currentPage.page_location }}" alt="page number: {{ currentPage.page_number}}"  usemap="#Map" />
+      </div>
     <!-- panel modal -->
     <div ng-app='ModalDemo'>
       <div ng-controller='MyCtrl'>
-            <div id= "modalButtonDiv">
+        <div class="container">
+          <div class = "row" id= "modalButtonDiv">
+            <div class= "col-md-12 text-center">
               <button class="btn btn-danger" ng-click='toggleModal()'>View Panel-by-Panel</button>
             </div>
-              <modal-dialog show='modalShown' width='80%' height='90%'>
-            <div id="galleryImg">
-              <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "400px" />
-            </div>
-            <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
+          </div>
+        </div>
+              <modal-dialog show='modalShown' width='85%' height='90%'>
+            <div id="galleryImg"class="container">
+              <div class = "row">
+                <div class= "col-md-10 text-center">
+                <img ng-src="{{ currentPanel.panel_location }}" alt="panel number: {{ currentPanel.panel_number}}" height= "400px" />
+                <p>page number: {{ currentPage.page_number}} panel number: {{ currentPanel.panel_number}}</p>
 
-            <!-- commentary mode toggle -->
-            <div class= "showComment" ng-show="commentVar == 'true'">
-              <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
-              <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
-            </div>
+                <!-- commentary mode toggle -->
+                <div class= "showComment" ng-show="commentVar == 'true'">
+                  <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
+                  <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
+                </div>
 
-            <!-- navigation in panel mode -->
-            <div id = panelNav>
-              <button type="button" class="btn btn-danger" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
-              <button type="button" class="btn btn-danger" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
+                <!-- navigation in panel mode -->
+                <div id = panelNav>
+                  <button type="button" class="btn btn-danger" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
+                  <button type="button" class="btn btn-danger" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
+                </div>
             </div>
-
-            <!-- display panel thumbnails -->
+          </div>
+        </div>
+              <!-- display panel thumbnails -->
             <div class="container">
               <div class = "row" id= "panelThumbnails">
-                <div class= "showIssues col-xs-1" ng-repeat='record in panelToView track by $index'>
+                <div class= "showIssues col-xs-1 text-center" ng-repeat='record in panelToView track by $index'>
                   <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPanelOpen( $index )"><img ng-src="{{record.panel_thumbnail}}" alt="{{record.panel_number}}'s thumbnail" width= "20px" /></button>
                 </div>
               </div>
@@ -51,7 +57,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-sm-4 text-center">
+          <div class="col-md-12 text-center">
             <button type="button" class="btn btn-danger" name="Prevbutton" ng-click= "prevPage()">Previous</button>
               <a href="#library"><b>Library</b></a>
             <button type="button" class="btn btn-danger" name="Nextbutton" ng-click= "nextPage()">Next</button>
