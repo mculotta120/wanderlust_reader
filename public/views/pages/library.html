@@ -1,8 +1,11 @@
 
     <div id='displayIssues' ng-init="getIssues()">
       <h2>Available Issues:</h2>
+      <div id="freeAmerica">
+      <h3>Welcome To Free America</h3>
+      </div>
         <div class = "row">
-            <div class= "showIssues col-md-6" ng-repeat='record in allIssues track by $index'>
+            <div id = "showIssues"  ng-repeat='record in allIssues track by $index'>
                 <h4>
                 <button class="btn btn-danger" ng-click= "galleryOpen($index)" ><img ng-src="{{record.issue_thumbnail}}" alt="{{record.issue_name}}'s cover" height= "50px" /></button>
                 <b>Issue Number:  </b> {{ record.issue_number}} <b> Title: </b> {{ record.issue_name}}

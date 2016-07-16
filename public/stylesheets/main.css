@@ -11,6 +11,9 @@ h1{
 h2{
   font-family: 'Special Elite', cursive; ;
 }
+h3{
+  font-family: 'Special Elite', cursive; ;
+}
 a{
     color: #D6450E;
 }
@@ -60,7 +63,14 @@ footer{
   padding: 100px;
   margin: 50px;
 }
-
+#freeAmerica{
+  margin-left: 25px;
+  margin-top: 40px;
+  color: #B43200;
+}
+#showIssues{
+  margin: 30px;
+}
 #displayIssues{
   background-color: white;
   padding: 100px;
