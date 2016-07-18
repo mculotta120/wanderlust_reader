@@ -12,7 +12,7 @@
         <div class="container">
           <div class = "row" id= "modalButtonDiv">
             <div class= "col-md-12 text-center">
-              <button class="btn btn-danger" ng-click='toggleModal()'>View Panel-by-Panel</button>
+              <button class="btn btn-danger" ng-click='toggleModal()'><img ng-src="/images/buttons/panelMode.png" alt="Previous" height= "20px"/></button>
             </div>
           </div>
         </div>
@@ -25,14 +25,14 @@
 
                 <!-- commentary mode toggle -->
                 <div class= "showComment" ng-show="commentVar == 'true'">
-                  <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/comment.png" alt="comment available" height= "15px"/></button>
+                  <button type="button" class="btn btn-danger" name="commentButton" ng-click="toggle()"><img ng-src="/images/buttons/commentButton.png" alt="comment available" height= "20px"/></button>
                   <p ng-show="commentText">{{ currentPanel.panel_commentary }}</p>
                 </div>
 
                 <!-- navigation in panel mode -->
                 <div id = panelNav>
-                  <button type="button" class="btn btn-danger" name="PrevPanelbutton" ng-click= "prevPanel()">Previous</button>
-                  <button type="button" class="btn btn-danger" name="NextPanelbutton" ng-click= "nextPanel()">Next</button>
+                  <button type="button" class="btn btn-danger" name="PrevPanelbutton" ng-click= "prevPanel()"><img ng-src="/images/buttons/PrevBuytton.png" alt="Previous" height= "20px"/></button>
+                  <button type="button" class="btn btn-danger" name="NextPanelbutton" ng-click= "nextPanel()"><img ng-src="/images/buttons/nextButton.png" alt="Next" height= "20px"/></button>
                 </div>
             </div>
           </div>
@@ -55,12 +55,12 @@
       <div id = pageNumDisplay>
           <p><b>page number: {{ currentPage.page_number}} </b></p>
       </div>
-      <div class="container">
+      <div class="container" id= navButtons>
         <div class="row">
           <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-danger" name="Prevbutton" ng-click= "prevPage()">Previous</button>
-              <a href="#library"><b>Library</b></a>
-            <button type="button" class="btn btn-danger" name="Nextbutton" ng-click= "nextPage()">Next</button>
+            <button type="button" class="btn btn-danger" name="Prevbutton" ng-click= "prevPage()"><img ng-src="/images/buttons/PrevBuytton.png" alt="Previous" height= "20px"/></button>
+              <a href="#library"><img ng-src="/images/buttons/libraryButton.png" alt="Library" height= "25px"/></a>  <a href="#home"><img ng-src="/images/buttons/homeButton.png" alt="Home" height= "25px"/></a>
+            <button type="button" class="btn btn-danger" name="Nextbutton" ng-click= "nextPage()"><img ng-src="/images/buttons/nextButton.png" alt="Next" height= "20px"/></button>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
       <div class= "container">
         <div class = "row" id= "pageThumbnails">
           <div class= "col-xs-1 text-center" ng-repeat='record in issueToView track by $index'>
-            <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "50px" /></button>
+            <button type="button" class="btn btn-danger" name="thumbnail_button" ng-click="thumbnailPageOpen( $index )"><img ng-src="{{record.page_thumbnail}}" alt="{{record.page_number}}'s thumbnail" height= "30px" /></button>
           </div>
         </div>
         </div>

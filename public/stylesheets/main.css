@@ -50,6 +50,7 @@ footer{
       bottom: 0;
       right: 0;
       left: 0;
+  height: 150px;
       /*border: 3px solid white;*/
 }
 #nav{
@@ -75,7 +76,7 @@ footer{
   background-color: white;
   padding: 100px;
   margin: 50px;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 #welcomeText{
   background-color: white;
@@ -108,7 +109,7 @@ footer{
   margin: 0 auto;
 }
 #galleryImg img {
-   cursor: crosshair;
+   cursor: zoom-in;
     transition: -webkit-transform 0.5s ease;
     /*margin: auto;*/
 }
@@ -123,6 +124,7 @@ footer{
 #pageNumDisplay{
   text-align: center;
 }
+
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;
