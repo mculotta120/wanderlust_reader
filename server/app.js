@@ -35,8 +35,10 @@ app.use(passport.session());
 
 // Mongo Connection //
 // mongoose.connect('localhost:/wanderlustdb');
-var mongoURI = "mongodb://localhost:/wanderlustdb";
+var mongoURI = "mongodb://reader:comics123@ds023495.mlab.com:23495/wanderlustdb";
+console.log("1");
 var mongoDB = mongoose.connect(mongoURI).connection;
+console.log("2");
 
 mongoDB.on('error', function(err){
    if(err) {
