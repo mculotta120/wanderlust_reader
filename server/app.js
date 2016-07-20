@@ -54,7 +54,7 @@ mongoDB.once('open', function(){
 //   res.sendFile( path.resolve( 'views/index.html' ) );
 // });
 
-app.listen( 8080, 'localhost', function( req, res ){ // spins up server
+app.listen( process.env.Port|| 8080, 'localhost', function( req, res ){ // spins up server
   console.log( 'listening on 8080' );
 });
 
